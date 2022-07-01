@@ -17,32 +17,39 @@
         <b-modal 
             :id="`modal-opinion-${id}`" 
             :title="`Escribe tu opinión para el juego:${name}`"
+            centered
             hide-footer
             >
-            <form ref="form" @submit.stop.prevent="handleSubmit">
+            <form 
+                ref="form" 
+                @submit.stop.prevent="handleSubmit"
+                novalidate="true"
+                validated="true">
                 <b-form-group
                     label="Nombre:"
                     label-for="name-input"
-                    invalid-feedback="El nombre es obligatorio"
                     >
                     <b-form-input
                         id="name-input"
                         placeholder="Evan You"
-                        v-model="nombre"
-                        required
+                        v-model="$v.opinion.nombre.$model"
+                        :state="validateState('nombre')"
                     ></b-form-input>
+                    <b-form-invalid-feedback>El nombre es obligatorio y debe tener al menos 3 caracteres</b-form-invalid-feedback>
                 </b-form-group>
                 <b-form-group
                     label="Opiniones"
                     label-for="opinion-input"
-                    invalid-feedback="La opinión es obligatoria">
+                    >
                     <b-form-textarea
                         id="opinion-input"
                         placeholder="Tu opinión debe ir aquí..."
-                        v-model="opinion"
+                        v-model="$v.opinion.opinionText.$model"
+                        :state="validateState('opinionText')"
                         rows="3"
                         max-rows="6"
                     ></b-form-textarea>
+                    <b-form-invalid-feedback>La opinion es obligatorio y debe tener al menos 10 caracteres</b-form-invalid-feedback>
                 </b-form-group>
             </form>
             <b-button class="mt-3" block @click="$bvModal.hide(`modal-opinion-${id}`)">Cerrar</b-button>
@@ -54,6 +61,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { required, minLength } from 'vuelidate/lib/validators'
 
 export default {
     name: 'game-card',
@@ -85,19 +93,51 @@ export default {
     },
     data: function(){
         return {
-            nombre: null,
-            opinion: null
+            opinion: {
+                nombre: null,
+                opinionText: null,
+            }
         }
     },
-    // computed: {},
+    validations: {
+        opinion: {
+            nombre: { 
+                required, 
+                minLength: minLength(3) 
+            },
+            opinionText: { 
+                required, 
+                minLength: minLength(10) 
+            }
+        }
+    },
+    computed: {},
     methods: {
         ...mapActions(['add_opinion']),
+        validateState(value) {
+            const { $dirty, $error } = this.$v.opinion[value];
+            return $dirty ? !$error : null;
+        },
         addOpinion() {
-            let opinion = {
-                nombre: this.nombre,
-                opinion: this.opinion
-            }
-            this.add_opinion(opinion)
+            // let validOpinion = true
+
+            // if ( this.nombre == '' || this.opinion.nombre.length < 3) {
+            //     validOpinion = false
+            // }
+
+            // if ( this.opinion == '' || this.opinion.opinionText.length < 10 ) {
+            //     validOpinion = false
+            // }
+
+            // if(validOpinion) {
+                //let opinion = {
+                //    nombre: this.nombre,
+                //    opinion: this.opinion
+                //}
+                this.add_opinion(this.opinion)
+                this.nombre = ''
+                this.opinion = ''
+            // }
         }
     }
     // watch: {},
