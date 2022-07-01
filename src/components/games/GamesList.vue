@@ -1,10 +1,11 @@
 <template>
     <b-container>
         <b-row>
-            <b-col v-for="(game, index) in Games" :key="index">
+            <b-col cols="4" v-for="(game, index) in Games" :key="index">
                 <card-game
+                    :id="index"
                     :name="game.name"
-                    :rating="game.ratign"
+                    :rating="game.rating"
                     :released="game.released"
                     :updated="game.updated"
                     :image="game.background_image"></card-game>

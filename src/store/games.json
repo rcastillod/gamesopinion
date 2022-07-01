@@ -12,5 +12,33 @@
         "released": "2011-04-18",
         "updated": "2020-08-03",
         "background_image": "https://pivigames.blog/wp-content/uploads/2018/07/portal-2-mac-2844-0-min.jpg"
+    },
+    {
+        "name": "Red Dead Redemption 2",
+        "rating": 9.27,
+        "released": "2018-10-26",
+        "updated": "2019-10-27",
+        "background_image": "https://media.vandal.net/i/960x640/42943/red-dead-redemption-2-201891716550_2.jpg"
+    },
+    {
+        "name": "Half-Life: Alyx",
+        "rating": 9.47,
+        "released": "2020-03-23",
+        "updated": "2020-10-22",
+        "background_image": "https://media.vandal.net/i/960x640/79546/halflife-alyx-201911211923616_2.jpg"
+    },
+    {
+        "name": "Super Mario Odyssey",
+        "rating": 9.32,
+        "released": "2017-10-27",
+        "updated": "2020-06-02",
+        "background_image": "https://media.vandal.net/i/960x640/43395/super-mario-odyssey-201792015119_1.jpg"
+    },
+    {
+        "name": "Super Mario Odyssey",
+        "rating": 9.32,
+        "released": "2017-10-27",
+        "updated": "2020-06-02",
+        "background_image": "https://media.vandal.net/i/960x640/43395/super-mario-odyssey-201792015119_1.jpg"
     }
 ]

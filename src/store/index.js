@@ -6,13 +6,20 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    Games
+    Games,
+    opiniones: []
   },
   getters: {
   },
   mutations: {
+    ADD_OPINION: (state, opinion) => {
+      state.opiniones.push(opinion)
+    }
   },
   actions: {
+    add_opinion: ({commit}, opinion) => {
+      commit('ADD_OPINION', opinion)
+    }
   },
   modules: {
   }
