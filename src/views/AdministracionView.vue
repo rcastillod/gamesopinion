@@ -1,10 +1,18 @@
 <template>
-    <h1>Vista Administración</h1>
+    <b-container>
+        <b-row>
+            <b-col>
+                <opiniones-table></opiniones-table>
+            </b-col>
+        </b-row>
+    </b-container>
 </template>
 
 <script>
+import OpinionesTable from '@/components/opiniones/OpinionesTable.vue'
+
 export default {
-    name: 'component-name',
+    name: 'administracion-view',
     // props: {},
     data: function(){
         return {}
@@ -12,7 +20,9 @@ export default {
     // computed: {},
     //methods: {}
     // watch: {},
-    // components: {},
+    components: {
+        'opiniones-table': OpinionesTable
+    },
     // mixins: [],
     // filters: {},
     // -- Lifecycle Methods

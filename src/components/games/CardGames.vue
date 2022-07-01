@@ -53,7 +53,7 @@
                 </b-form-group>
             </form>
             <b-button class="mt-3" block @click="$bvModal.hide(`modal-opinion-${id}`)">Cerrar</b-button>
-            <b-button class="mt-3" block @click="addOpinion()">Guardar</b-button>
+            <b-button class="mt-3" block @click="addOpinion(name)">Guardar</b-button>
         </b-modal>
     </div>
 
@@ -118,7 +118,7 @@ export default {
             const { $dirty, $error } = this.$v.opinion[value];
             return $dirty ? !$error : null;
         },
-        addOpinion() {
+        addOpinion(name) {
             // let validOpinion = true
 
             // if ( this.nombre == '' || this.opinion.nombre.length < 3) {
@@ -134,6 +134,7 @@ export default {
                 //    nombre: this.nombre,
                 //    opinion: this.opinion
                 //}
+                this.opinion.nombreJuego = name
                 this.add_opinion(this.opinion)
                 this.nombre = ''
                 this.opinion = ''

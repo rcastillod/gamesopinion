@@ -1,10 +1,18 @@
 <template>
-    <h1>Vista Opiniones</h1>
+    <b-container>
+        <b-row>
+            <b-col>
+                <opiniones-list></opiniones-list>
+            </b-col>
+        </b-row>
+    </b-container>
 </template>
 
 <script>
+import OpinionesList from '@/components/opiniones/OpinionesList.vue'
+
 export default {
-    name: 'component-name',
+    name: 'opiniones-view',
     // props: {},
     data: function(){
         return {}
@@ -12,7 +20,9 @@ export default {
     // computed: {},
     //methods: {}
     // watch: {},
-    // components: {},
+    components: {
+        'opiniones-list': OpinionesList
+    },
     // mixins: [],
     // filters: {},
     // -- Lifecycle Methods

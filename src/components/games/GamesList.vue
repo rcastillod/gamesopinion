@@ -1,7 +1,7 @@
 <template>
     <b-container>
         <b-row>
-            <b-col cols="4" v-for="(game, index) in Games" :key="index">
+            <b-col cols="12" sm="6" lg="4" v-for="(game, index) in Games" :key="index">
                 <card-game
                     :id="index"
                     :name="game.name"
