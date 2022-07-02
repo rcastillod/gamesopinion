@@ -1,5 +1,6 @@
 <template>
     <div>
+        
         <b-card
             :title="name"
             :img-src="image"
@@ -14,46 +15,51 @@
             </b-card-text> -->
             <b-button v-b-modal="`modal-opinion-${id}`" variant="primary">Opinion</b-button>
         </b-card>
+
         <b-modal 
             :id="`modal-opinion-${id}`" 
             :title="`Escribe tu opinión para el juego:${name}`"
             centered
             hide-footer
             >
-            <form 
+            <alert-message v-if="formInvalid" :mensaje="formAlertMessage"></alert-message>
+            <alert-message v-if="formSuccess" type="success" mensaje="La opinion se ha guardado con éxito!"></alert-message>
+            <button v-if="formSuccess" class="btn btn-primary" @click="toOpiniones()">Ver opiniones</button>
+            <form
+                v-else
                 ref="form" 
                 @submit.stop.prevent="handleSubmit"
                 novalidate="true"
                 validated="true">
-                <b-form-group
-                    label="Nombre:"
-                    label-for="name-input"
-                    >
-                    <b-form-input
-                        id="name-input"
-                        placeholder="Evan You"
-                        v-model="$v.opinion.nombre.$model"
-                        :state="validateState('nombre')"
-                    ></b-form-input>
-                    <b-form-invalid-feedback>El nombre es obligatorio y debe tener al menos 3 caracteres</b-form-invalid-feedback>
-                </b-form-group>
-                <b-form-group
-                    label="Opiniones"
-                    label-for="opinion-input"
-                    >
-                    <b-form-textarea
-                        id="opinion-input"
-                        placeholder="Tu opinión debe ir aquí..."
-                        v-model="$v.opinion.opinionText.$model"
-                        :state="validateState('opinionText')"
-                        rows="3"
-                        max-rows="6"
-                    ></b-form-textarea>
-                    <b-form-invalid-feedback>La opinion es obligatorio y debe tener al menos 10 caracteres</b-form-invalid-feedback>
-                </b-form-group>
+                    <b-form-group
+                        label="Nombre:"
+                        label-for="name-input"
+                        >
+                        <b-form-input
+                            id="name-input"
+                            placeholder="Evan You"
+                            v-model="$v.opinion.nombre.$model"
+                            :state="validateState('nombre')"
+                        ></b-form-input>
+                        <b-form-invalid-feedback>El nombre es obligatorio y debe tener al menos 3 caracteres</b-form-invalid-feedback>
+                    </b-form-group>
+                    <b-form-group
+                        label="Opiniones"
+                        label-for="opinion-input"
+                        >
+                        <b-form-textarea
+                            id="opinion-input"
+                            placeholder="Tu opinión debe ir aquí..."
+                            v-model="$v.opinion.opinionText.$model"
+                            :state="validateState('opinionText')"
+                            rows="3"
+                            max-rows="6"
+                        ></b-form-textarea>
+                        <b-form-invalid-feedback>La opinion es obligatorio y debe tener al menos 10 caracteres</b-form-invalid-feedback>
+                    </b-form-group>
+                    <b-button class="mt-3" block @click="$bvModal.hide(`modal-opinion-${id}`)">Cerrar</b-button>
+                    <b-button class="mt-3" block @click="addOpinion(name)">Guardar</b-button>
             </form>
-            <b-button class="mt-3" block @click="$bvModal.hide(`modal-opinion-${id}`)">Cerrar</b-button>
-            <b-button class="mt-3" block @click="addOpinion(name)">Guardar</b-button>
         </b-modal>
     </div>
 
@@ -62,6 +68,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { required, minLength } from 'vuelidate/lib/validators'
+import AlertMessage from '@/components/AlertMessage.vue'
 
 export default {
     name: 'game-card',
@@ -96,7 +103,9 @@ export default {
             opinion: {
                 nombre: null,
                 opinionText: null,
-            }
+            },
+            formInvalid: null,
+            formSuccess: false
         }
     },
     validations: {
@@ -111,9 +120,22 @@ export default {
             }
         }
     },
-    computed: {},
+    computed: {
+        formAlertMessage() {
+            let message = ''
+            if ( this.opinion.nombre == null || this.opinion.opinionText == null ) {
+                message = 'Por favor ingresa todos los campos requeridos.'
+            } else {
+                message = 'Por favor corrige los campos para poder guardar.'
+            }
+            return message
+        }
+    },
     methods: {
         ...mapActions(['add_opinion']),
+        toOpiniones() {
+            this.$router.push('/opiniones')
+        },
         validateState(value) {
             const { $dirty, $error } = this.$v.opinion[value];
             return $dirty ? !$error : null;
@@ -124,10 +146,20 @@ export default {
 
             this.opinion.idOpinion = parseInt(randomId)
             this.opinion.nombreJuego = name
-            this.add_opinion(this.opinion)
-            this.nombre = ''
-            this.opinion = ''
+            if ( this.$v.$invalid ) {
+                this.$v.$touch()
+                this.formInvalid = true
+            } else {
+                this.formInvalid = false
+                this.formSuccess = true
+                this.add_opinion(this.opinion)
+                this.nombre = ''
+                this.opinion = ''
+            }
         }
+    },
+    components: {
+        'alert-message': AlertMessage
     }
 }
 </script>

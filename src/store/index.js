@@ -23,7 +23,7 @@ export default new Vuex.Store({
       state.opiniones.push(opinion)
     },
     DELETE_OPINION: (state, id) => {
-      let index = state.opiniones.forEach( opinion => opinion.idOpinion == id )
+      let index = state.opiniones.findIndex( opinion => opinion.idOpinion == id )
       state.opiniones.splice(index, 1)
     },
     EDIT_OPINION: (state, opinion) => {

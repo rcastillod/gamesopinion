@@ -1,5 +1,5 @@
 <template>
-    <b-alert show variant="danger">{{mensaje}}</b-alert>
+    <b-alert show :variant="type">{{mensaje}}</b-alert>
 </template>
 
 <script>
@@ -9,6 +9,11 @@ export default {
         mensaje: {
             type: String,
             require: true
+        },
+        type: {
+            type: String,
+            default: 'danger',
+            require: false
         }
     },
     data: function(){
