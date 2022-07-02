@@ -7,12 +7,8 @@ import Games from './games.json'
 Vue.use(Vuex)
 
 const vuexLocalStorage = new VuexPersist({
-  key: 'vuex', // The key to store the state on in the storage provider.
-  storage: window.localStorage, // or window.sessionStorage or localForage
-  // Function that passes the state and returns the state with only the objects you want to store.
-  // reducer: state => state,
-  // Function that passes a mutation and lets you decide if it should update the state in localStorage.
-  // filter: mutation => (true)
+  key: 'vuex',
+  storage: window.localStorage,
 })
 
 export default new Vuex.Store({
@@ -25,11 +21,31 @@ export default new Vuex.Store({
   mutations: {
     ADD_OPINION: (state, opinion) => {
       state.opiniones.push(opinion)
+    },
+    DELETE_OPINION: (state, id) => {
+      let index = state.opiniones.forEach( opinion => opinion.idOpinion == id )
+      state.opiniones.splice(index, 1)
+    },
+    EDIT_OPINION: (state, opinion) => {
+      let id = opinion[0]
+      let nombre = opinion[1]
+      let texto = opinion[2]
+
+      let index = state.opiniones.findIndex(opinion => opinion.idOpinion === id)
+      
+      state.opiniones[index].nombre = nombre
+      state.opiniones[index].opinionText = texto
     }
   },
   actions: {
     add_opinion: ({commit}, opinion) => {
       commit('ADD_OPINION', opinion)
+    },
+    delete_opinion: ({commit}, id) => {
+      commit('DELETE_OPINION', id)
+    },
+    edit_opinion: ({commit}, opinion) => {
+      commit('EDIT_OPINION', opinion)
     }
   },
   modules: {

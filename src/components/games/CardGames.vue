@@ -119,34 +119,16 @@ export default {
             return $dirty ? !$error : null;
         },
         addOpinion(name) {
-            // let validOpinion = true
+            let randomNumber = Math.floor(Math.random() * 1000)
+            let randomId = `00${randomNumber}`
 
-            // if ( this.nombre == '' || this.opinion.nombre.length < 3) {
-            //     validOpinion = false
-            // }
-
-            // if ( this.opinion == '' || this.opinion.opinionText.length < 10 ) {
-            //     validOpinion = false
-            // }
-
-            // if(validOpinion) {
-                //let opinion = {
-                //    nombre: this.nombre,
-                //    opinion: this.opinion
-                //}
-                this.opinion.nombreJuego = name
-                this.add_opinion(this.opinion)
-                this.nombre = ''
-                this.opinion = ''
-            // }
+            this.opinion.idOpinion = parseInt(randomId)
+            this.opinion.nombreJuego = name
+            this.add_opinion(this.opinion)
+            this.nombre = ''
+            this.opinion = ''
         }
     }
-    // watch: {},
-    // components: {},
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
 }
 </script>
 

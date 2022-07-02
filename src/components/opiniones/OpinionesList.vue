@@ -23,22 +23,15 @@ import AlertMessage from '@/components/AlertMessage.vue'
 
 export default {
     name: 'opiniones-list',
-    // props: {},
     data: function(){
         return {}
     },
     computed: {
         ...mapState(['opiniones'])
     },
-    //methods: {}
-    // watch: {},
     components: {
         'alert-message': AlertMessage
-    },
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
+    }
 }
 </script>
 

@@ -13,20 +13,13 @@ import OpinionesList from '@/components/opiniones/OpinionesList.vue'
 
 export default {
     name: 'opiniones-view',
-    // props: {},
+
     data: function(){
         return {}
     },
-    // computed: {},
-    //methods: {}
-    // watch: {},
     components: {
         'opiniones-list': OpinionesList
     },
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
 }
 </script>
 

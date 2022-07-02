@@ -20,22 +20,15 @@ import CardGame from '@/components/games/CardGames.vue'
 
 export default {
     name: 'games-list',
-    // props: {},
     data: function(){
         return {}
     },
     computed: {
         ...mapState(['Games'])
     },
-    //methods: {}
-    // watch: {},
     components: {
         'card-game': CardGame
-    },
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
+    }
 }
 </script>
 
