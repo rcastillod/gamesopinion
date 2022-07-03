@@ -1,6 +1,6 @@
 <template>
     <div>
-        <alert-message v-if="deleted" type="success" mensaje="La opinion ha sido eliminada."></alert-message>
+        <alert-message v-if="deleted" type="success" :dismissTime="5" mensaje="La opinion ha sido eliminada."></alert-message>
         <alert-message v-if="opiniones.length == 0" mensaje="No existen opiniones por administrar."></alert-message>
         <table v-else class="table">
             <thead>

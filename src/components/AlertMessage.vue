@@ -1,5 +1,5 @@
 <template>
-    <b-alert show :variant="type">{{mensaje}}</b-alert>
+    <b-alert :show="dismissTime ? dismissTime : true" fade :variant="type">{{mensaje}}</b-alert>
 </template>
 
 <script>
@@ -14,19 +14,15 @@ export default {
             type: String,
             default: 'danger',
             require: false
+        },
+        dismissTime: {
+            type: Number,
+            require: false
         }
     },
     data: function(){
         return {}
-    },
-    // computed: {},
-    //methods: {}
-    // watch: {},
-    // components: {},
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
+    }
 }
 </script>
 

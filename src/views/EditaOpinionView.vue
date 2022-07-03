@@ -3,6 +3,8 @@
         <b-container>
             <b-row>
                 <b-col>
+                    <alert-message v-if="formInvalid" :mensaje="formAlertMessage"></alert-message>
+                    <alert-message v-if="formSuccess" :dismissTime="5" type="success" mensaje="La opinion se ha editado con éxito!"></alert-message>
                     <form 
                         ref="form" 
                         @submit.stop.prevent="handleSubmit"
@@ -34,9 +36,9 @@
                             ></b-form-textarea>
                             <b-form-invalid-feedback>La opinion es obligatorio y debe tener al menos 10 caracteres</b-form-invalid-feedback>
                         </b-form-group>
+                        <b-button class="mt-3" block @click="goBack">Regresar</b-button>
+                        <b-button class="mt-3" block @click="editOpinion(opinionId)">Guardar</b-button>
                     </form>
-                    <b-button class="mt-3" block @click="goBack">Regresar</b-button>
-                    <b-button class="mt-3" block @click="editOpinion(opinionId)">Guardar</b-button>
                 </b-col>
             </b-row>
         </b-container>
@@ -46,6 +48,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import { required, minLength } from 'vuelidate/lib/validators'
+import AlertMessage from '@/components/AlertMessage.vue'
 
 export default {
     name: 'editaopinion-view',
@@ -55,7 +58,9 @@ export default {
             opinion: {
                 nombre: null,
                 opinionText: null,
-            }
+            },
+            formInvalid: null,
+            formSuccess: false
         }
     },
     validations: {
@@ -77,6 +82,15 @@ export default {
         },
         getOpinion() {
             return this.opiniones.find( opinion => opinion.idOpinion === this.opinionId )
+        },
+        formAlertMessage() {
+            let message = ''
+            if ( this.opinion.nombre == null || this.opinion.opinionText == null ) {
+                message = 'Por favor ingresa todos los campos requeridos.'
+            } else {
+                message = 'Por favor corrige los campos para poder guardar.'
+            }
+            return message
         }
     },
     methods: {
@@ -90,10 +104,19 @@ export default {
         },
         editOpinion(id) {
             let values = [id, this.opinion.nombre, this.opinion.opinionText]
-            this.edit_opinion(values)
+            if ( this.$v.$invalid ) {
+                this.$v.$touch()
+                this.formInvalid = true
+            } else {
+                this.formInvalid = false
+                this.formSuccess = true
+                this.edit_opinion(values)
+            }
         }
     },
-    // components: {},
+    components: {
+        'alert-message': AlertMessage
+    },
     // -- Lifecycle Methods
     created() {
         this.opinion.nombre = this.getOpinion.nombre
