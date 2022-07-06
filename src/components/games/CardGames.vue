@@ -1,7 +1,12 @@
 <template>
     <div>
-        
-        <b-card
+        <div class="game-card" @click="sendGameName(name)">
+            <div class="game-card__image">
+                <img :src="image" :alt="name">
+            </div>
+            <h4 class="game-card__title">{{name}}</h4>
+        </div>
+        <!-- <b-card
             :title="name"
             :img-src="image"
             img-alt="Image"
@@ -10,9 +15,6 @@
             style="max-width: 20rem;"
             class="mb-2"
         >
-            <!-- <b-card-text>
-                {{name}}
-            </b-card-text> -->
             <b-button v-b-modal="`modal-opinion-${id}`" variant="primary">Opinion</b-button>
         </b-card>
 
@@ -60,7 +62,7 @@
                     <b-button class="mt-3" block @click="$bvModal.hide(`modal-opinion-${id}`)">Cerrar</b-button>
                     <b-button class="mt-3" block @click="addOpinion(name)">Guardar</b-button>
             </form>
-        </b-modal>
+        </b-modal> -->
     </div>
 
 </template>
@@ -68,7 +70,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { required, minLength } from 'vuelidate/lib/validators'
-import AlertMessage from '@/components/AlertMessage.vue'
+//import AlertMessage from '@/components/AlertMessage.vue'
 
 export default {
     name: 'game-card',
@@ -136,6 +138,9 @@ export default {
         toOpiniones() {
             this.$router.push('/opiniones')
         },
+        sendGameName(name) {
+            this.$emit('getGameName', name )
+        },
         validateState(value) {
             const { $dirty, $error } = this.$v.opinion[value];
             return $dirty ? !$error : null;
@@ -159,11 +164,32 @@ export default {
         }
     },
     components: {
-        'alert-message': AlertMessage
+        //'alert-message': AlertMessage
     }
 }
 </script>
 
-<style scoped>
-    
+<style scoped lang="scss">
+.game-card {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+.game-card__image {
+    height: 18.75rem;
+    width: 12.5rem;
+    & > img {
+        border-radius: $br;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
+}
+.game-card__title {
+    font-size: 1.25rem;
+    text-align: center;
+    width: 12.5rem;
+}
 </style>

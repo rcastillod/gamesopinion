@@ -1,0 +1,42 @@
+body {
+    background-color: $dark-color;
+    color: $white-color;
+    font-family: $body-font;
+    font-weight: $fw-light;
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: $heading-font;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+main,
+section {
+    position: relative;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: .625em;
+}
+::-webkit-scrollbar-track {
+    background-color: hsl(var(--primary-color-shade) / .9);
+}
+::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--primary-color-tint));
+    border-radius: var(--br);
+}
