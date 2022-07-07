@@ -19,8 +19,8 @@
                     <td>{{opinion.nombreJuego}}</td>
                     <td>{{opinion.opinionText}}</td>
                     <td>
-                        <button v-b-modal="`modal-delete-${opinion.idOpinion}`" class="btn btn-danger">Eliminar</button>
-                        <button @click="toEdit(opinion.idOpinion)" class="btn btn-primary">Editar</button>
+                        <b-button v-b-modal="`modal-delete-${opinion.idOpinion}`" class="btn-game__accent">Eliminar</b-button>
+                        <b-button @click="toEdit(opinion.idOpinion)" class="btn-game">Editar</b-button>
                         <delete-opinion-modal @opinionDeleted="opinionDeleted" :idOpinion="opinion.idOpinion"></delete-opinion-modal>
                     </td>
                 </tr>

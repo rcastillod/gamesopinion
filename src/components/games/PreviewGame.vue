@@ -1,27 +1,39 @@
 <template>
-    <div class="preview-wrapper">
-        <div class="preview-description">
-            <h2 class="title">{{name}}</h2>
-            <div class="meta">
-                <div class="rating">
-                    {{rating}}
+    <div>
+        <div class="preview-wrapper">
+            <div class="preview-description">
+                <h2 class="title">{{name}}</h2>
+                <div class="meta">
+                    <div class="rating">
+                        {{rating}}
+                    </div>
+                    <div class="released">Released: <span>{{released}}</span></div>
+                    <div class="updated">Updated: <span>{{updated}}</span></div>
                 </div>
-                <div class="released">Released: <span>{{released}}</span></div>
-                <div class="updated">Updated: <span>{{updated}}</span></div>
+                <div class="description">
+                    <p>{{description}}</p>
+                </div>
+                <button class="button-opinion" v-b-modal="`modal-opinion-${id}`">Opinar</button>
             </div>
-            <div class="description">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui dignissimos culpa perferendis, atque in nulla quisquam explicabo numquam, nobis harum accusamus voluptatem accusantium. Tempore maxime, commodi animi rerum aliquid quisquam?</p>
-            </div>
-            <button class="button-opinion">Opinar</button>
+            <div class="preview-image" :style="{backgroundImage: `url('${image}')` }"></div>
         </div>
-        <div class="preview-image" :style="{backgroundImage: `url('${image}')` }"></div>
+        <modal-opinion 
+            :id="id"
+            :name="name"
+            ></modal-opinion>
     </div>
 </template>
 
 <script>
+import ModalOpinion from '@/components/opiniones/ModalOpinion.vue'
+
 export default {
     name: 'preview-game',
     props: {
+        id: {
+            type: Number,
+            require: true
+        },
         name: {
             type: String,
             require: true
@@ -42,18 +54,17 @@ export default {
             type: String,
             require: true
         },
+        description: {
+            type: String,
+            require: true
+        }
     },
     data: function(){
         return {}
     },
-    // computed: {},
-    //methods: {}
-    // watch: {},
-    // components: {},
-    // mixins: [],
-    // filters: {},
-    // -- Lifecycle Methods
-    // -- End Lifecycle Methods
+    components: {
+        'modal-opinion': ModalOpinion
+    }
 }
 </script>
 
@@ -61,7 +72,7 @@ export default {
 .preview-wrapper {
     display: grid;
     grid-template-columns: 30% 20% 50%;
-    min-height: 28.125rem;
+    min-height: 35rem;
     padding-left: 5.625rem;
 }
 .preview-description {

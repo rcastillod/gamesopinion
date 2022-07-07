@@ -1,11 +1,13 @@
 <template>
-    <b-container>
-        <b-row>
-            <b-col>
-                <opiniones-list></opiniones-list>
-            </b-col>
-        </b-row>
-    </b-container>
+    <section class="opiniones">
+        <b-container>
+            <b-row>
+                <b-col>
+                    <opiniones-list></opiniones-list>
+                </b-col>
+            </b-row>
+        </b-container>
+    </section>
 </template>
 
 <script>

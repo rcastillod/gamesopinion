@@ -40,3 +40,32 @@ section {
     background-color: hsl(var(--primary-color-tint));
     border-radius: var(--br);
 }
+
+/* Buttons */
+.btn-game {
+    background-color: transparent;
+    border: 1px solid $secondary-color;
+    color: $secondary-color;
+    padding-inline: 1.875rem;
+    transition: all 300ms ease-in-out;
+    &:hover,
+    &:focus {
+        background-color: $secondary-color;
+        color: $white-color;
+    }
+    &__accent {
+        background-color: $primary-color;
+        border-color: $primary-color;
+        color: $white-color;
+        &:hover,
+        &:focus {
+            background-color: $primary-color-shade;
+        }
+    }
+}
+
+/* Pages */
+.opiniones,
+.opiniones-admin {
+    padding-top: 6.25rem;
+}

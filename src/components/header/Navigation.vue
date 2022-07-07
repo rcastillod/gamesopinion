@@ -42,7 +42,8 @@ export default {
         align-items: center;
         background-color: $tertiary-color;
         display: flex;
-        height: 100vh;
+        height: 100%;
+        min-height: 100vh;
         flex-direction: column;
         grid-column: 1 / 2;
         justify-content: space-between;
