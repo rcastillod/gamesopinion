@@ -51,6 +51,8 @@ section {
     &:hover,
     &:focus {
         background-color: $secondary-color;
+        border-color: $secondary-color;
+        box-shadow: none;
         color: $white-color;
     }
     &__accent {
@@ -60,12 +62,85 @@ section {
         &:hover,
         &:focus {
             background-color: $primary-color-shade;
+            border-color: $primary-color-shade;
+            box-shadow: none;
         }
     }
 }
 
+/* Modal */
+.modal-content.modal-opinion,
+.modal-content.modal-delete {
+    background-color: rgba($dark-color, .7);
+    backdrop-filter: blur(5px);
+    border: 0;
+    padding: 1.875rem;
+    .modal-opinion-header {
+        padding-block: 1.25rem;
+    }
+}
+.header-title {
+    border-bottom: 1px solid $secondary-color;
+    h5 {
+        display: flex;
+        flex-direction: column;
+        gap: .3125rem;
+        margin-bottom: .9375rem;
+        span {
+            font-weight: $fw-bold;
+        }
+    }
+}
+.close {
+    background-color: transparent;
+    border: none;
+    line-height: 1;
+    position: absolute;
+    top: -0.625rem;
+    right: -0.625rem;
+    svg {
+        fill: $white-color;
+        transition: fill 300ms ease-in-out;
+        width: 1.5625rem;
+        &:hover,
+        &:focus {
+            fill: $secondary-color;
+        }
+    }
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+.form-group label {
+    margin-bottom: .625rem;
+}
+.form-group input,
+.form-group textarea {
+    background-color: transparent !important;
+    border-color: $secondary-color !important;
+    color: $white-color !important;
+    padding-block: .625rem;
+    &:focus {
+        box-shadow: none !important;
+        outline: none;
+    }
+}
+.buttons-wrapper {
+    display: flex;
+    gap: 1.25rem;
+}
+.modal-delete .modal-body {
+    padding: 0;
+}
+.modal-delete .buttons-wrapper {
+    gap: 1rem;
+}
+
 /* Pages */
 .opiniones,
-.opiniones-admin {
+.opiniones-admin,
+.edita-opinion {
     padding-top: 6.25rem;
 }

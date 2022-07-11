@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h3 class="mb-5">Administración de opiniones</h3>
         <alert-message v-if="deleted" type="success" :dismissTime="5" mensaje="La opinion ha sido eliminada."></alert-message>
         <alert-message v-if="opiniones.length == 0" mensaje="No existen opiniones por administrar."></alert-message>
         <table v-else class="table">
@@ -18,7 +19,7 @@
                     <td>{{opinion.nombre}}</td>
                     <td>{{opinion.nombreJuego}}</td>
                     <td>{{opinion.opinionText}}</td>
-                    <td>
+                    <td class="btn-wrapper">
                         <b-button v-b-modal="`modal-delete-${opinion.idOpinion}`" class="btn-game__accent">Eliminar</b-button>
                         <b-button @click="toEdit(opinion.idOpinion)" class="btn-game">Editar</b-button>
                         <delete-opinion-modal @opinionDeleted="opinionDeleted" :idOpinion="opinion.idOpinion"></delete-opinion-modal>
@@ -59,6 +60,15 @@ export default {
 }
 </script>
 
-<style scoped>
-    
+<style scoped lang="scss">
+    .table {
+        color: $white-color
+    }
+    .table th {
+        color: $secondary-color;
+    }
+    .btn-wrapper {
+        display: flex;
+        gap: 1.25rem;
+    }
 </style>

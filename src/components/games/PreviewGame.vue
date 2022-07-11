@@ -71,27 +71,46 @@ export default {
 <style scoped lang="scss">
 .preview-wrapper {
     display: grid;
-    grid-template-columns: 30% 20% 50%;
+    grid-template-columns: 1fr;
     min-height: 35rem;
-    padding-left: 5.625rem;
+    padding-inline: 0;
+    @media ( min-width: 576px ) {
+        padding-left: 2.325rem;
+    }
+    @media ( min-width: 992px ) {
+        grid-template-columns: 30% 20% 50%;
+        padding-left: 5.625rem;
+    }
 }
 .preview-description {
-    background: linear-gradient(to right, $dark-color 60%, rgba($dark-color, .9) 70%, rgba($dark-color, .7) 80%, transparent);
+    background: linear-gradient(to right, $dark-color 40%, rgba($dark-color, .9) 50%, rgba($dark-color, .7) 60%, transparent);
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
     padding-block: 6.25rem;
-    grid-column: 1 / 3;
+    grid-column: 1 / -1;
     grid-row: 1 / -1;
     z-index: 1;
+    @media ( max-width: 575px ) {
+        padding-inline: .9375rem;
+    }
+    @media ( min-width: 992px ) {
+        background: linear-gradient(to right, $dark-color 60%, rgba($dark-color, .9) 70%, rgba($dark-color, .7) 80%, transparent);
+        grid-column: 1 / 3;
+        grid-row: 1 / -1;
+    }
     .title {
         color: $secondary-color;
         font-size: 38px;
     }
     .meta {
-        align-items: center;
         display: flex;
+        flex-direction: column;
         gap: .9375rem;
+        @media ( min-width: 576px ) {
+            align-items: center;
+            flex-direction: row;
+        }
     }
     .rating {
         background-color: $primary-color;
@@ -128,7 +147,13 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    grid-column: 2 / 4;
+    grid-column: 1 / -1;
     grid-row: 1 / -1;
+    opacity: .2;
+    @media ( min-width: 992px ) {
+        grid-column: 2 / 4;
+        grid-row: 1 / -1;
+        opacity: 1;
+    }
 }
 </style>

@@ -20,6 +20,9 @@ export default {
 <style lang="scss">
 .main-wrapper {
     display: grid;
-    grid-template-columns: 5rem auto;
+    grid-template-columns: 1fr;
+    @media ( min-width: 576px ) {
+      grid-template-columns: 5rem auto;
+    }
 }
 </style>

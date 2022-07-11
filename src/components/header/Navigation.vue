@@ -19,7 +19,7 @@
                 </svg>
             </router-link>
         </nav>
-        <a href="" class="logo">
+        <a @click="toHome()" class="logo">
             <img :src="logo" alt="Games">
         </a>
     </div>
@@ -33,6 +33,11 @@ export default {
         return {
             logo: require('@/assets/images/logo.svg')
         }
+    },
+    methods: {
+        toHome() {
+            this.$router.push('/')
+        }
     }
 }
 </script>
@@ -42,23 +47,38 @@ export default {
         align-items: center;
         background-color: $tertiary-color;
         display: flex;
-        height: 100%;
-        min-height: 100vh;
-        flex-direction: column;
-        grid-column: 1 / 2;
         justify-content: space-between;
-        padding-block: 1.875rem;
+        padding-block: .625rem;
+        padding-inline: 1.5625rem;
+        @media ( min-width: 576px ) {
+            flex-direction: column;
+            height: 100%;
+            grid-column: 1 / 2;
+            min-height: 100vh;
+            padding-block: 1.875rem;
+        }
     }
     .logo {
+        cursor: pointer;
         width: 3.125rem;
+        @media ( max-width: 575px ) {
+            order: -1;
+        }
     }
     nav {
         display: flex;
-        flex-direction: column;
         gap: 1.875rem;
+        @media ( min-width: 576px ) {
+            flex-direction: column;
+        }
         svg {
             fill: $secondary-color;
             width: 1.875rem;
+            transition: fill 400ms ease-in-out;
+            &:hover,
+            &:focus {
+                fill: $primary-color;
+            }
         }
     }
 </style>
