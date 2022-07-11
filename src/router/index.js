@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import OpinionesView from '@/views/OpinionesView'
 import AdministracionView from '@/views/AdministracionView'
 import EditaOpinionView from '@/views/EditaOpinionView'
+import NotFoundView from '@/views/NotFoundView'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/editaopinion/:id',
     name: 'editaopinion',
     component: EditaOpinionView
+  },
+  {
+    path: '*',
+    name: 'notfound',
+    component: NotFoundView
   }
   // {
   //   path: '/about',
