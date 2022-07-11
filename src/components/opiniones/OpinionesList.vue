@@ -1,9 +1,6 @@
 <template>
-    
     <alert-message v-if="opiniones.length == 0" mensaje="No existen opiniones para mostrar."></alert-message>
-
     <div v-else class="accordion" role="tablist">
-        <h3 class="mb-5">Listado de opiniones</h3>
         <b-card v-for="(opinion, index) in opiniones" :key="index" no-body class="mb-1">
             <b-card-header header-tag="header" role="tab" v-b-toggle="`accordion-${index}`">
                 Opinion creada por: {{opinion.nombre}}. Para el juego {{opinion.nombreJuego}}

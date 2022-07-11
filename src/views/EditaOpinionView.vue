@@ -3,6 +3,11 @@
         <b-container>
             <b-row>
                 <b-col>
+                    <h3 class="mb-5">Editar opinion</h3>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
                     <edita-opinion></edita-opinion>
                 </b-col>
             </b-row>

@@ -3,6 +3,11 @@
         <b-container>
             <b-row>
                 <b-col>
+                    <h3 class="mb-5">Administración de opiniones</h3>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
                     <opiniones-table></opiniones-table>
                 </b-col>
             </b-row>

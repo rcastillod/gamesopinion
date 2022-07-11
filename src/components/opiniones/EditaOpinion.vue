@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h3 class="mb-5">Editar opinion</h3>
         <alert-message v-if="formInvalid" :mensaje="formAlertMessage"></alert-message>
         <alert-message v-if="formSuccess" :dismissTime="5" type="success" mensaje="La opinion se ha editado con éxito!"></alert-message>
         <form 
